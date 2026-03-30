@@ -1,16 +1,23 @@
-# React + Vite
+AI Digital Twin (Frontend)
+This is the interface for the AI Digital Twin—a predictive system designed to help users understand the tipping point between peak productivity and burnout.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Most productivity tools just track time. This project uses AI to analyze behavioral inputs and predict future risks, giving users a "Digital Twin" to experiment with before they actually hit a wall.
 
-Currently, two official plugins are available:
+The Stack
+I chose Vite + React for the speed. The UI is built with Tailwind CSS to keep the design system consistent and the bundle size small.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React Router DOM for seamless, zero-refresh navigation.
 
-## React Compiler
+Lucide React for clean, consistent iconography.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Component-Driven Design to ensure the dashboard widgets are reusable across the app.
 
-## Expanding the ESLint configuration
+Key Modules:
+The Predictor
+The core of the app. It’s a multi-input form that captures work habits and stress markers. It’s designed with validation to ensure the AI gets clean data for every prediction.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Performance Dashboard
+A bird’s-eye view of your stats. Instead of just showing numbers, I used progress indicators and color-coded risk levels to make the burnout data "scannable" at a glance.
+
+Historical Audit
+Every prediction is logged. This table allows users to look back and see how their productivity scores have fluctuated over weeks or months.
