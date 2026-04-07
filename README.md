@@ -73,8 +73,7 @@ Students can use this system to understand how their habits affect their academi
 
 
 ## Authors
-Abhay Singh
-Lakhinder Singh
+Abhay Singh<BR>Lakhinder Singh
 
 
 ## Conclusion
