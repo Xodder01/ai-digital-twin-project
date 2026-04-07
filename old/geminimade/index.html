@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Twin | Modern Dashboard</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+            </div>
+
+            <div class="profile-section">
+                <div class="avatar-container">
+                    <!-- Standard placeholder avatar matching the style -->
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Abhay&backgroundColor=e2e8f0"
+                        alt="Avatar" class="avatar">
+                </div>
+                <h3 class="profile-name">Hello, Abhay</h3>
+                <div class="badge-tag">
+                    <i data-lucide="message-square" class="badge-icon"></i> High Performer
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active"><i data-lucide="home"></i> Home</a>
+                <a href="#" class="nav-item"><i data-lucide="check-square"></i> Tasks</a>
+                <a href="#" class="nav-item"><i data-lucide="bar-chart-2"></i> Analytics</a>
+                <a href="#" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <div class="search-container">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" placeholder="Q .." class="search-input">
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-btn"><i data-lucide="bell"></i></button>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Abhay&backgroundColor=e2e8f0" alt="User"
+                        class="nav-avatar">
+                    <i data-lucide="chevron-down" class="nav-chevron"></i>
+                </div>
+            </header>
+
+            <!-- Dashboard Body -->
+            <div class="dashboard-scroll">
+
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="banner-content">
+                        <h2>Hello Abhay, are you ready to start your day?</h2>
+                        <p>You're on track to achieve your goals!</p>
+                    </div>
+                </div>
+
+                <!-- Input Section (Compact Form) -->
+                <div class="card inputs-card">
+                    <div class="card-header">
+                        <h3><i data-lucide="edit-3"></i> Log Today's Habits</h3>
+                        <div class="header-actions">
+                            <button class="btn-primary" id="predictBtn">
+                                <span>Analyze Habits</span>
+                                <div class="loader" id="btnLoader"></div>
+                            </button>
+                            <button class="btn-secondary" id="whatIfBtn" style="display: none;">Optimize Habits</button>
+                        </div>
+                    </div>
+
+                    <form id="predictionForm" class="inputs-grid">
+                        <!-- Hidden profile fields safely retained -->
+                        <input type="hidden" id="age" value="20">
+                        <input type="hidden" id="gender" value="Male">
+                        <input type="hidden" id="academic_level" value="Undergraduate">
+                        <input type="hidden" id="internet_quality" value="Good">
+                        <input type="hidden" id="part_time_job" value="0">
+                        <input type="hidden" id="upcoming_deadline" value="1">
+
+                        <div class="input-col">
+                            <label>Stay/Study Data</label>
+                            <div class="range-group"><span>Study (<span id="sh_val">5</span>h)</span> <input
+                                    type="range" id="study_hours" min="0" max="15" step="0.5" value="5"
+                                    oninput="updateVal('sh_val', this.value)"></div>
+                            <div class="range-group"><span>Self Study (<span id="ssh_val">2</span>h)</span> <input
+                                    type="range" id="self_study_hours" min="0" max="15" step="0.5" value="2"
+                                    oninput="updateVal('ssh_val', this.value)"></div>
+                            <div class="range-group"><span>Online Class (<span id="oc_val">2</span>h)</span> <input
+                                    type="range" id="online_classes_hours" min="0" max="15" step="0.5" value="2"
+                                    oninput="updateVal('oc_val', this.value)"></div>
+                        </div>
+
+                        <div class="input-col">
+                            <label>Digital & Leisure</label>
+                            <div class="range-group"><span>Screen Time (<span id="st_val">6</span>h)</span> <input
+                                    type="range" id="screen_time_hours" min="0" max="20" step="0.5" value="6"
+                                    oninput="updateVal('st_val', this.value)"></div>
+                            <div class="range-group"><span>Social Media (<span id="sm_val">2</span>h)</span> <input
+                                    type="range" id="social_media_hours" min="0" max="10" step="0.5" value="2"
+                                    oninput="updateVal('sm_val', this.value)"></div>
+                            <div class="range-group"><span>Gaming (<span id="gm_val">1</span>h)</span> <input
+                                    type="range" id="gaming_hours" min="0" max="10" step="0.5" value="1"
+                                    oninput="updateVal('gm_val', this.value)"></div>
+                        </div>
+
+                        <div class="input-col">
+                            <label>Health & Rest</label>
+                            <div class="range-group"><span>Sleep (<span id="sl_val">7</span>h)</span> <input
+                                    type="range" id="sleep_hours" min="0" max="15" step="0.5" value="7"
+                                    oninput="updateVal('sl_val', this.value)"></div>
+                            <div class="range-group"><span>Exercise (<span id="ex_val">30</span>m)</span> <input
+                                    type="range" id="exercise_minutes" min="0" max="120" step="5" value="30"
+                                    oninput="updateVal('ex_val', this.value)"></div>
+                            <div class="range-group"><span>Mental Health (<span id="mh_val">8</span>/10)</span> <input
+                                    type="range" id="mental_health_score" min="1" max="10" step="1" value="8"
+                                    oninput="updateVal('mh_val', this.value)"></div>
+                        </div>
+
+                        <div class="input-col extras">
+                            <div class="number-group">
+                                <label>Caffeine (mg)</label>
+                                <input type="number" id="caffeine_intake_mg" value="100">
+                            </div>
+                            <div class="scanning-status hidden" id="scanningState">
+                                <i data-lucide="loader" class="spin-icon"></i>
+                                <span id="terminalText">Syncing...</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsContent" class="hidden">
+                    <!-- Top KPI Cards -->
+                    <div class="kpi-grid">
+
+                        <!-- Productivity Card -->
+                        <div class="card kpi-card prod-card">
+                            <h4 class="card-title">Productivity Prediction</h4>
+                            <div class="kpi-body">
+                                <div class="kpi-info">
+                                    <div class="huge-number"><span id="prodNumber">78</span>%</div>
+                                    <div class="trend positive">+5% from yesterday</div>
+                                </div>
+                                <div class="chart-box doughnut-box">
+                                    <canvas id="prodChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Burnout Card -->
+                        <div class="card kpi-card burnout-kpi">
+                            <h4 class="card-title">Burnout Risk</h4>
+                            <div class="burnout-content">
+                                <div>
+                                    <div class="burnout-text" id="burnoutValue">Medium</div>
+                                    <div class="caution-badge" id="stressValue"><i data-lucide="alert-triangle"></i>
+                                        Caution</div>
+                                </div>
+                                <div class="flame-icon">🔥</div>
+                            </div>
+                            <div class="trend fade-trend">Mon Tue Wed Thu Fri</div>
+                        </div>
+
+                        <!-- Focus Index Card -->
+                        <div class="card kpi-card focus-card">
+                            <h4 class="card-title">Focus Index</h4>
+                            <div class="kpi-body sparkline-body">
+                                <div class="kpi-info inline-info">
+                                    <div class="huge-number"><span id="focusNumber">72</span><span
+                                            class="sub">/100</span></div>
+                                </div>
+                                <div class="chart-box sparkline-box">
+                                    <canvas id="focusSparkline"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Middle Section -->
+                    <div class="middle-grid">
+                        <div class="card large-chart-card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">Weekly Productivity Overview</h3>
+                                <div class="chart-actions">
+                                    <i data-lucide="menu"></i>
+                                    <i data-lucide="mail"></i>
+                                    <i data-lucide="download" onclick="window.print()"></i>
+                                </div>
+                            </div>
+                            <div class="line-chart-container">
+                                <canvas id="weeklyLineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Section -->
+                    <div class="bottom-grid">
+                        <!-- Bar Chart Placeholder -->
+                        <div class="card stat-block">
+                            <h4 class="card-title">Sleep vs Productivity</h4>
+                            <div class="bar-chart-container">
+                                <canvas id="sleepBarChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Pie Chart Placeholder -->
+                        <div class="card stat-block">
+                            <h4 class="card-title">Study vs Screen Time</h4>
+                            <div class="pie-chart-container">
+                                <canvas id="studyPieChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- AI Recommendations -->
+                        <div class="card insight-card">
+                            <h4 class="card-title"><i data-lucide="lightbulb" class="bulb-icon"></i> AI Insight of the
+                                Day</h4>
+                            <div class="insight-content" id="insightContent">
+                                <p>Based on your recent sleep pattern, reducing screen time by 1 hour could increase
+                                    productivity by <strong>8%</strong>.</p>
+                                <ul id="recommendationList" class="recommendation-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Results Content -->
+
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+        function updateVal(id, val) {
+            document.getElementById(id).textContent = val;
+        }
+    </script>
+</body>
+
+</html>
